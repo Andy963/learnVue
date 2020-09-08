@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!-- template language -->
+    <p>{{ msg }}</p>
+    <p>
+        {{ 'string will not change'}}
+    </p>
+    <!--    2-->
+    <p>{{ 1+1 }}</p>
+    <!--    name:andy-->
+    <p>{{ {'name':'andy'} }}</p>
+    <!--    andy-->
+    <p> {{ person.name }}</p>
+</div>
+
+</body>
+<!--import-->
+<script src="../Vue.js"></script>
+<script>
+    // init a object
+    new Vue({
+        el: '#app',
+        // bind data
+        data: {
+            msg: 'cucumber',
+            person: {
+                name: 'andy',
+                age: 29
+            }
+        }
+    })
+</script>
+</html>
