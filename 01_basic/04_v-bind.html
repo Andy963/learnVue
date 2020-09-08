@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            background-color: green;
+            width: 200px;
+            height: 100px;
+        }
+
+        .active {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <img src="./1.jpg" alt="静态图片">
+        <img v-bind:src="imgSrc" v-bind:alt="alt">
+        <div class="box" v-bind:class="{active:isActive}"></div>
+        <button v-on:click="changeColor">change</button>
+        <!--        v-bind can be simplifed to :-->
+        <!--        v-on can simplify to @-->
+        <div class="box" :class="{active:isActive}"></div>
+        <button @click="changeColor">change</button>
+    </div>
+</div>
+
+</body>
+<script src="../Vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                imgSrc: './1.jpg',
+                alt: "动态图片",
+                isActive: true
+            }
+
+        },
+        methods: {
+            changeColor() {
+                this.isActive = !this.isActive
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul v-if="data.status==='ok'">
+        <!--        use :key to bind the id to the li-->
+        <li v-for="(item,index) in data.users" :key="item.id">
+            {{ index}}. {{ item.id }} -- {{ item.name }} -- {{ item.age }}
+        </li>
+    </ul>
+    <ul>
+        <!--        the first is value,second is key-->
+        <li v-for="(value,key) in data.person">{{ key }} --> {{ value }}</li>
+    </ul>
+</div>
+
+</body>
+<script src="../Vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                data: {
+                    status: 'ok',
+                    users: [
+                        {id: 1, name: "andy", age: 29},
+                        {id: 2, name: "jack", age: 19},
+                        {id: 3, name: "mary", age: 19},
+                    ],
+                    person: {
+                        name: "andy"
+                    }
+                }
+            }
+
+        },
+        methods: {}
+    })
+</script>
+</html>

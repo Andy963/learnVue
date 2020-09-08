@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--    the value of v-show must be a string-->
+    <button v-on:click="handleClick">隐藏</button>
+    <div class="box" v-show="isShow"></div>
+    <div v-if="isShow">你看到我了吗</div>
+
+    <div v-if="Math.random()>0.5">
+        有了
+    </div>
+    <div v-else>没了</div>
+
+</div>
+
+</body>
+<script src="../Vue.js"></script>
+<script>
+    // init a object
+    new Vue({
+        el: '#app',
+        // bind data
+        // single model
+        data() {
+            return {isShow: true}
+        },
+        methods: {
+            handleClick() {
+                this.isShow = !this.isShow
+            }
+        }
+    })
+</script>
+</html>

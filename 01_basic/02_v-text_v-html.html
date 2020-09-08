@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p>{{ msg }}</p>
+    <div v-text="msg"></div>
+    <div v-html="msg"></div>
+    <div>{{ add(2,3) }}</div>
+</div>
+
+</body>
+<script src="../Vue.js"></script>
+<script>
+    // init a object
+    new Vue({
+        el: '#app',
+        // bind data
+        // single model
+        data() {
+            let msg = '<p>cucumber</p>'
+            // data is a function, and must return and object
+            return {'msg': msg}
+        },
+        methods: {
+            add(x, y) {
+                return x + y
+            }
+        }
+    })
+</script>
+</html>
