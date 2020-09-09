@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p>{{ msg }}</p>
+    <!--    use the computed method name-->
+    <p>{{ upperName }}</p>
+</div>
+</body>
+<script src="../Vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                msg: "andy"
+            }
+        },
+        methods: {
+            change() {
+                this.msg = 'mike';
+            }
+        },
+        computed: {
+            upperName() {
+                return this.msg.toUpperCase()
+            }
+        }
+    })
+</script>
+</html>
