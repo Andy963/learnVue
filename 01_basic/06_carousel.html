@@ -43,6 +43,23 @@
                     this.curIndex++;
                 }
             }
+
+        },
+        // 钩子函数
+        created() {
+            setInterval(() => {
+                // 箭头函数会改变this，指代vue对象
+                if (this.curIndex === 2) {
+                    this.curIndex = 0
+                } else {
+                    this.curIndex++
+                }
+            }, 1000)
+            // 将外部的this保存起来，外部this为vue对象
+            // let _this = this;
+            // setInterval( function () {
+            //     console.log(_this);
+            // })
         }
     })
 </script>
