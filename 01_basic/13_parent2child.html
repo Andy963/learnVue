@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+</div>
+</body>
+<script src="../Vue.js"></script>
+<script>
+    let Vheader = {
+        data() {
+            return {}
+        },
+        // 挂载父组件的属性
+        props: ['msg', 'post'],
+        template: `
+            <div>
+            <h2>日天</h2>
+            <h2>{{ msg }}</h2>
+            <h2> {{ post.id }}</h2>
+            <h2> {{ post.name }}</h2>
+            </div>
+        `
+    }
+
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                text: "App中的text",
+                post: {
+                    id: 1,
+                    name: "andy"
+                }
+            }
+        },
+        //使用组件
+        template: `
+            <Vheader :msg="text" v-bind:post="post"></Vheader>
+        `,
+        components: {
+            // 如果key,value一样，可以 只写一个
+            // 注册组件
+            Vheader
+        }
+    })
+</script>
+</html>
