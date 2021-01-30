@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跑马灯</title>
+    <!--    1.导入-->
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="浪起来" @click="lang">
+    <input type="button" value="低调" @click="stop">
+    <h4>{{msg}}</h4>
+</div>
+<script>
+    // if you want to use data, or methods, you should use this, this means the instance of vue
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: '猥琐发育，别浪!',
+            intervalId: null // 定时器Id
+        },
+        methods: {
+            /*
+            思路：已经有定时器时，点击浪，则直接返回，否则产生一个定时器，有点单例模式的思想。
+            停止时则将定时器id置为Null,
+             */
+            lang() {
+                // 当定时器id存在时，直接返回
+                if (this.intervalId !== null) {
+                    return
+                }
+
+                this.intervalId = setInterval(() => {
+                    // 获取第一个字符
+                    let start = this.msg.substring(0, 1)
+                    // 获取后面所有字符
+                    let end = this.msg.substring(1)
+                    // 重新拼接新字符
+                    this.msg = end + start
+                }, 400)
+            },
+            stop() { //停止定时器
+                clearInterval(this.intervalId)
+                // 清除后将定时器id置为null
+                this.intervalId = null
+            }
+        }
+    })
+</script>
+</body>
+</html>

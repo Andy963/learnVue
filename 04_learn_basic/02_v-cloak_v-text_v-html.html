@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<div id="app">
+    <p v-cloak="{{msg}}"></p>
+    <!--    v-text会替换标签内的全部内容，而插入值表达式则只替换{{}}点位符的内容-->
+    <p v-text> ===={{msg}}</p>
+    <div v-html>v-html会将内容解析成html标签显示，而不是纯文本</div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'cloak会解决显闪烁问题，当网络请示没有到达时，会显示括号，而不是内容，当内容到了时才会显示内容,所以会出现闪烁'
+            msg2: '<h1>我是h2标签</h1>'
+        }
+    })
+</script>
+
+</body>
+</html>
