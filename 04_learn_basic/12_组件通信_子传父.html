@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件通信子传父</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <Parent></Parent>
+</div>
+
+
+<script>
+    /*
+    在父组件中，子组件中绑定自定义事件
+    在子组件中，触发原生的事件，在事件函数通过this.$emit触发父组件中的事件，最后触发父组件中对应的函数
+     */
+    Vue.component('Child', {
+        data() {
+            return {}
+        },
+        template: `
+        <div>
+        <h4>我是子组件</h4>
+        <h4>{{childData}}</h4>
+        <h4>子组件输入的值将触发input事件，从而触发 deliverInput函数</h4>
+        <input type="text" @input="deliverInput">
+        </div>
+        `,
+        methods: {
+            deliverInput(e) {
+                const val = e.target.value;
+                // 两个参数，第一个为要触发的父组件中定义的函数，而触发父组件中的事件后又相应的触发父组件中的函数
+                this.$emit('getInput', val)
+            },
+        },
+        props: ['childData']
+    })
+
+    const Parent = {
+        data() {
+            return {
+                'msg': '我是父组件'
+            }
+        },
+        methods: {
+            showInput(val) {
+                console.log(val)
+            }
+        },
+        template: `
+         <div> <h2>{{msg}}</h2>
+
+         <Child :childData="msg"  @getInput="showInput"></Child>
+         </div>
+
+         `
+    }
+
+    new Vue({
+        el: "#app",
+        data: {},
+        components: {
+            Parent
+        }
+    })
+</script>
+</body>
+</html>
