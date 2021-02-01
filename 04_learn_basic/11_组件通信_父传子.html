@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Vue.js"></script>
+</head>
+<div id="app">
+    <Parent></Parent>
+</div>
+<script>
+    /*
+    总结：
+    // 在子组件中声明props接收在父组件挂载的属性
+    // 可以在子组件的template中任意使用
+    // 在父组件绑定自定义的属性
+     */
+    Vue.component('Child', {
+        template: `
+        <div>
+        <h3>我是子组件</h3>
+        <h4>{{childData}}</h4>
+        </div>
+        `,
+        props: ['childData'] // 通过Props来获取相应的属性
+    })
+
+    const Parent = {
+        data() {
+            return {
+                msg: '我是父组件传过来的值'
+            }
+        },
+        template: `
+        <div>
+            <h2>我是父组件</h2>
+            <h3> 绑定到子组件的属性名，后面是当前父组件的属性名</h3>
+            <Child :childData='msg'></Child>
+        </div>
+        `,
+    }
+    new Vue({
+        el: "#app",
+        data: {},
+        components: {
+            Parent
+        }
+    })
+</script>
+<body>
+
+</body>
+</html>
