@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>global template</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <App></App>
+</div>
+<script>
+    // 创建全局组件，第一个参数是组件名，第二个参数是配置
+    Vue.component('Vheader', {
+        template: `
+        <div>
+        我是导航组件
+        </div>
+        `
+    })
+    // 局部组件，全局组件将加入到本组件中
+    const App = {
+        data() {
+            return {
+                msg: '我是App组件'
+            }
+        },
+        template: `<div>
+                 <Vheader></Vheader>
+                </div>`,
+        methods: {
+            handleClick() {
+                this.msg = '学习局部组件'
+            }
+        },
+
+    }
+    // 创建实例，挂载局部组件，并挂载到app
+    new Vue({
+        el: "#app",
+        data: {},
+        components: {
+            App
+        }
+    })
+</script>
+</body>
+</html>
