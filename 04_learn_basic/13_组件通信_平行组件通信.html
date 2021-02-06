@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>平行组件通信</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <App></App>
+</div>
+<script>
+    const bus = new Vue()
+    Vue.component('B', {
+        data() {
+            return {
+                count: 0
+            }
+        },
+        template: `
+         <div>
+         <div>B组件</div>
+         {{count}}</div>
+        `,
+        created() {
+            // 通过On来绑定
+            bus.$on('add', (n) => {
+                this.count += n;
+            })
+        }
+    })
+
+    Vue.component('A', {
+        data() {
+            return {}
+        },
+        template: `
+        <div>
+        <span>A组件</span>
+        <button @click="handleClick">加入购物车</button>
+        </div>
+        `,
+        methods: {
+            handleClick() {
+                // 通过emit来触发
+                bus.$emit('add', 1)
+            }
+        }
+    })
+    const App = {
+        data() {
+            return {}
+        },
+        template: `
+        <div>
+        <A></A>
+        <B></B>
+</div>
+        `
+    }
+    new Vue({
+        el: "#app",
+        data: {},
+        components: {
+            App
+
+        }
+    })
+</script>
+
+</body>
+</html>
