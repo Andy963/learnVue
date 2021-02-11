@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <App></App>
+</div>
+
+<script>
+
+    Vue.component('Mbtn', {
+        data() {
+            return {}
+        },
+        template: `
+        <div>
+       <button>
+      <slot name="login"></slot>
+      <slot name="register"></slot>
+        </button>
+        </div>
+        `
+
+    })
+    const App = {
+        data() {
+            return {
+                title: 'dad'
+            }
+        },
+        template: `
+        <div>
+        <Mbtn>
+        <template slot="login">
+         注册
+        </template>
+        </Mbtn>
+        <Mbtn>
+            <template slot="register">
+               登陆
+            </template>
+        </Mbtn>
+        </div>
+         `
+    }
+    new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            App
+        }
+    })
+</script>
+</body>
+</html>

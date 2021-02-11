@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态更新添加属性</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <h3>
+            {{user.name}} {{user.age}}
+        </h3>
+    </div>
+    <div>
+        <button @click="addAge"> 添加属性</button>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            user: {}
+        },
+        methods: {
+            addAge() {
+                // 通过这种方式添加属性,并不能成功
+                // this.user.age = 20
+                // 应使用vue的$set方法
+                // Vue.set(object,key,value)
+                // this.$set(this.user, 'age', 20)
+                // 或者es6的assign
+                this.user = Object.assign({}, this.user, {
+                    age: 20
+                })
+            }
+        },
+        created() {
+            setTimeout(() => {
+                this.user = {
+                    name: 'andy'
+                }
+
+            }, 1000)
+
+        }
+    })
+
+</script>
+
+</body>
+</html>

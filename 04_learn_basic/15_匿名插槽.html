@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>匿名插槽</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <App></App>
+</div>
+
+<script>
+
+    // 此模板定义一个匿名插槽,在需要使用的地方通过<Mbtn>
+    Vue.component('Mbtn', {
+        template: `
+        <button>
+        <slot></slot>
+</button>`
+    })
+
+    const App = {
+        data() {
+        },
+        template: `<div>
+            <Mbtn>登陆</Mbtn>
+            <Mbtn>注册</Mbtn>
+        </div>`
+    }
+    Vue.component('App',)
+    new Vue({
+        'el': '#app',
+        data: {},
+        components: {
+            App
+        }
+
+    })
+</script>
+</body>
+</html>
