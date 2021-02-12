@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mixin使用</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+    // 有两个组件，一个对话框，一个提示框，用法不一样，但逻辑相同，将逻辑提取到mixin
+    // 全局mixin
+    // Vue.mixin({}）
+    const toggleShow = {
+        data() {
+            return {
+                isShow: false
+            }
+        },
+        methods: {
+            toggleShow() {
+                this.isShow = !this.isShow
+            }
+        }
+    }
+
+    const Dia = {
+        template: ` <div v-if="isShow"><h3>对话框组件</h3></div>`,
+        mixins: [toggleShow]
+    }
+    const Tool = {
+        template: ` <div v-if="isShow"><h2>提示框组件</h2> </div>`,
+        mixins: [toggleShow]
+    }
+    new Vue({
+        el: "#app",
+        data: {},
+        components: {
+            Dia,
+            Tool
+        },
+        template: ` <div>
+            <button @click="clickDialog">对话框</button>
+            <button @click="clickToolTip">提示框</button>
+            <Dia ref="dialog"></Dia>
+            <Tool ref="toolTip"></Tool>
+               </div>`,
+        methods: {
+            clickDialog() {
+                this.$refs.dialog.toggleShow()
+            },
+            clickToolTip() {
+                // this.$refs.dialog.toggleShow()
+                this.$refs.toolTip.toggleShow()
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

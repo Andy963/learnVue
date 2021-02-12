@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mixin</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+</div>
+
+<script>
+
+    const myMixin = {
+        data() {
+            return {
+                'name': 'myMixin'
+            }
+        },
+        created() {
+            this.sayHello()
+        },
+        methods: {
+            sayHello() {
+                console.log('hello world')
+            }
+        }
+
+    }
+    new Vue({
+        el: "#app",
+        data: {
+            msg: '这是vue对象'
+        },
+        created() {
+            console.log('vue')
+        },
+        mixins: [myMixin]
+    })
+</script>
+</body>
+</html>
