@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>nextTick</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <App></App>
+</div>
+
+<script>
+    const Pop = {
+        data() {
+            return {
+                isShow: false,
+            }
+        },
+        props: {
+            name: {
+                type: String,
+                default: ''
+            }
+        },
+        template: `<div v-if="isShow">
+                    {{name}}
+                </div>`,
+        methods: {
+            show() {
+                console.log('show', this.name)
+                this.isShow = true
+                // 当isShow有变化，而想获取isShow中的数据name, 需要获取就使用nextTick
+            }
+        }
+    }
+    const App = {
+        data() {
+            return {
+                name: ''
+            }
+        },
+        created() {
+            setTimeout(() => {
+                this.name = 'Andy'
+                console.log('set timeout')
+                // 在这里使用nextTick
+                this.$nextTick(() => {
+                    this.$refs.pop.show()
+                })
+            }, 1000)
+        },
+        components: {
+            Pop
+        },
+        template: `<Pop ref="pop" :name="name"></Pop>`
+    }
+    const vm = new Vue({
+        el: "#app",
+        components: {
+            App
+        }
+    })
+</script>
+</body>
+</html>
